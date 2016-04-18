@@ -1,0 +1,42 @@
+{
+    "name": "BCDH/Laravel-eXist-db-Client",
+    "type": "library",
+    "description": "A client that abstracts out the XML RPC calls for eXist-db for Laravel 5",
+    "keywords": [
+        "eXist-db",
+        "php",
+        "laravel"
+    ],
+    "homepage": "https://github.com/BCDH/Laravel-eXist-db-Client",
+    "license": "GPL-2.0",
+    "require": {
+        "php" : "~5.5|~7.0",
+        "illuminate/support": "~5.1",
+        "pear/xml_rpc2": "1.1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.3",
+        "illuminate/support": "~5.1"
+    },
+    "include-path": ["./../../../vendor/pear/xml_rpc2/"],
+    "autoload": {
+        "psr-4": {
+            "BCDH\\ExistDbClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BCDH\\ExistDbClient\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
