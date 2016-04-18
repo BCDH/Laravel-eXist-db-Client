@@ -17,7 +17,7 @@ Usage
 =====
 
 ```php
-$connection = new ExistDbClient();
+$connection = new \BCDH\ExistDbClient\ExistDbClient();
 
 $stmt = $connection->prepareQuery('for $someNode in collection("/SomeCollection")/someNodeName[./somePredicateAttribute=$someValueToBeBound] return $someNode');
 $stmt->setSimpleXMLReturnType();
@@ -35,7 +35,7 @@ foreach($result as $xml) {
 
 #### Add the service provider to your config/app.php:
 
-    BCDH\ExistDb\ExistDbServiceProvider::class
+    BCDH\ExistDbClient\ExistDbServiceProvider::class
 
 #### Publish configuration:
 
@@ -52,4 +52,4 @@ foreach($result as $xml) {
         'host'      => "localhost",
         'port'      => 8080,
         'path'      => "/exist/xmlrpc/",
-    ],
+    ]
