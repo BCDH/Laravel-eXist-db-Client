@@ -1,5 +1,5 @@
 {
-    "name": "BCDH/Laravel-eXist-db-Client",
+    "name": "bcdh/laravel-exist-db-client",
     "type": "library",
     "description": "A client that abstracts out the XML RPC calls for eXist-db for Laravel 5",
     "keywords": [
@@ -7,7 +7,7 @@
         "php",
         "laravel"
     ],
-    "homepage": "https://github.com/BCDH/Laravel-eXist-db-Client",
+    "homepage": "https://github.com/bcdh/laravel-exist-db-client",
     "license": "GPL-2.0",
     "require": {
         "php" : "~5.5|~7.0",
