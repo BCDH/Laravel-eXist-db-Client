@@ -15,14 +15,16 @@ sudo pear channel-update pear.php.net
 
 ## Installing
 
-- Add the service provider to your config/app.php:
-```BCDH\ExistDbClient\ExistDbServiceProvider::class```
+#### 1. Add the service provider to your config/app.php:
 
-- Publish your configuration file:
-```php artisan vendor:publish ```
+    BCDH\ExistDbClient\ExistDbServiceProvider::class
+
+####2. Publish your configuration file:
     
-- Edit your connection credentials in `config/exist-db.php`
-```
+     php artisan vendor:publish
+    
+####3. Edit your connection credentials in `config/exist-db.php`
+
     [
         'protocol'  => "http",
         'user'      => "admin",
@@ -30,7 +32,7 @@ sudo pear channel-update pear.php.net
         'host'      => "localhost",
         'port'      => 8080,
         'path'      => "/exist/xmlrpc/",
-    ]```
+    ]
     
 
 ## Usage
