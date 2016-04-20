@@ -16,15 +16,12 @@ sudo pear channel-update pear.php.net
 ## Installing
 
 - Add the service provider to your config/app.php:
-
     ```BCDH\ExistDbClient\ExistDbServiceProvider::class```
 
 - Publish your configuration file:
-
      ```php artisan vendor:publish ```
     
 - Edit your connection credentials in `config/exist-db.php`
-
     ```
     [
         'protocol'  => "http",
