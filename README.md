@@ -11,7 +11,11 @@ A client that abstracts out the XML RPC calls for eXist-db.
 ```bash
 sudo apt-get install php-pear
 sudo pear channel-update pear.php.net
-```
+```\
+- PHP XSLT extension
+```bash
+sudo apt-get install php5-xsl
+```\
 
 Usage
 =====

@@ -46,6 +46,16 @@ class Query
 	{
 		$this->returnType = "DOM";
 	}
+
+	public function setExtendedXMLReturnType()
+	{
+		$this->returnType = "ExtendedXML";
+	}
+
+	public function setDomXMLReturnType()
+	{
+		$this->returnType = "DomXML";
+	}
 	
 	public function bindParam($variableName, $value)
 	{
@@ -98,6 +108,20 @@ class Query
 				break;
 			case "SimpleXML":
 				$result = new SimpleXMLResultSet(
+					$this->client,
+					$resultId,
+					$this->options
+				);
+				break;
+			case "ExtendedXML":
+				$result = new ExtendedXMLResultSet(
+					$this->client,
+					$resultId,
+					$this->options
+				);
+				break;
+			case "DomXML":
+				$result = new DomXMLResultSet(
 					$this->client,
 					$resultId,
 					$this->options

@@ -11,14 +11,13 @@
     "license": "GPL-2.0",
     "require": {
         "php" : "~5.5|~7.0",
-        "illuminate/support": "~5.1",
+        "illuminate/support": "5.*",
         "pear/xml_rpc2": "1.1.2"
     },
     "require-dev": {
         "phpunit/phpunit" : "4.*",
         "scrutinizer/ocular": "~1.1",
-        "squizlabs/php_codesniffer": "~2.3",
-        "illuminate/support": "~5.1"
+        "squizlabs/php_codesniffer": "~2.3"
     },
     "include-path": ["./../../../vendor/pear/xml_rpc2/"],
     "autoload": {
@@ -32,11 +31,12 @@
         }
     },
     "scripts": {
-        "test": "phpunit tests"
+        "test": "phpunit --verbose tests"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
