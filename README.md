@@ -1,7 +1,7 @@
-php-eXist-db-Client for Laravel 5
+eXist-db Client for Laravel 5
 =================================
 
-A client that abstracts out the XML RPC calls for eXist-db.
+A Laravel 5 package that abstracts out the XML RPC calls for [eXist-db](http://exist-db.org/exist/apps/homepage/index.html). Based on [php-eXist-db-Client](https://github.com/CuAnnan/php-eXist-db-Client).
 
 ##  Requirements:
 
@@ -17,11 +17,36 @@ sudo pear channel-update pear.php.net
 sudo apt-get install php5-xsl
 ```\
 
-Usage
-=====
+## Installing
+
+#### 1. Add the service provider to your config/app.php:
+
+    BCDH\ExistDbClient\ExistDbServiceProvider::class
+
+####2. Publish your configuration file:
+    
+     php artisan vendor:publish
+    
+####3. Edit your connection credentials in `config/exist-db.php`
+
+    [
+        'protocol'  => "http",
+        'user'      => "admin",
+        'password'  => "admin",
+        'host'      => "localhost",
+        'port'      => 8080,
+        'path'      => "/exist/xmlrpc/",
+    ]
+    
+
+## Usage 
+
 
 ```php
-$connection = new \BCDH\ExistDbClient\ExistDbClient();
+
+use BCDH\ExistDbClient\ExistDbClient;
+
+$connection = new ExistDbClient();
 
 $stmt = $connection->prepareQuery('for $someNode in collection("/SomeCollection")/someNodeName[./somePredicateAttribute=$someValueToBeBound] return $someNode');
 $stmt->setSimpleXMLReturnType();
@@ -34,26 +59,3 @@ foreach($result as $xml) {
     var_dump($xml->somePredicateAttribute);
 }
 ```
-
-## Installing
-
-#### Add the service provider to your config/app.php:
-
-    BCDH\ExistDbClient\ExistDbServiceProvider::class
-
-#### Publish configuration:
-
-**Laravel 5**
-
-    php artisan vendor:publish
-    
-#### Specify database connection credentials on your `config/exist-db.php`
-
-    [
-        'protocol'  => "http",
-        'user'      => "admin",
-        'password'  => "admin",
-        'host'      => "localhost",
-        'port'      => 8080,
-        'path'      => "/exist/xmlrpc/",
-    ]
