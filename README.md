@@ -11,15 +11,15 @@ A Laravel 5 package that abstracts out the XML RPC calls for [eXist-db](http://e
 ```bash
 sudo apt-get install php-pear
 sudo pear channel-update pear.php.net
-```\
+```
 - PHP XSLT extension
 ```bash
 sudo apt-get install php5-xsl
-```\
+```
 
 ## Installing
 
-#### 1. Add the service provider to your config/app.php:
+####1. Add the service provider to your config/app.php:
 
     BCDH\ExistDbClient\ExistDbServiceProvider::class
 
@@ -43,7 +43,6 @@ sudo apt-get install php5-xsl
 
 
 ```php
-
 use BCDH\ExistDbClient\ExistDbClient;
 
 $connection = new ExistDbClient();
