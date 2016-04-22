@@ -25,7 +25,7 @@ sudo apt-get install php5-xsl
 
 ####2. Publish your configuration file:
     
-     php artisan vendor:publish
+    php artisan vendor:publish
     
 ####3. Edit your connection credentials in `config/exist-db.php`
 

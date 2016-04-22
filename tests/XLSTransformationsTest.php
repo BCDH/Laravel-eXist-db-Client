@@ -27,15 +27,10 @@ class XLSTransformationsTest extends SetupTest
         $results = $resultPool->getAllResults();
         $res = $results[0];
 
-        $html = $res->transform(__DIR__.'/xml/cd_catalog.xsl');
+        $html = $res->transform(__DIR__.'/xml/cd_catalog_simplified.xsl');
+        $expected = $this->getExpectedXmlDom(array($res));
 
-        $expected1 = '<td>Empire Burlesque</td>';
-        $expected2 = '<td>Bob Dylan</td>';
-
-        $this->assertTrue(
-            str_contains($html, $expected1) &&
-            str_contains($html, $expected2)
-        );
+        $this->assertTrue(str_contains($html, $expected));
     }
 
     /**
@@ -50,15 +45,10 @@ class XLSTransformationsTest extends SetupTest
         $results = $resultPool->getAllResults();
         $res = $results[0];
 
-        $html = $res->transform(__DIR__.'/xml/cd_catalog.xsl');
+        $html = $res->transform(__DIR__.'/xml/cd_catalog_simplified.xsl');
+        $expected = $this->getExpectedXml(array($res));
 
-        $expected1 = '<td>Hide your heart</td>';
-        $expected2 = '<td>Bonnie Tyler</td>';
-
-        $this->assertTrue(
-            str_contains($html, $expected1) &&
-            str_contains($html, $expected2)
-        );
+        $this->assertTrue(str_contains($html, $expected));
     }
 
     /**
