@@ -58,3 +58,44 @@ foreach($result as $xml) {
     var_dump($xml->somePredicateAttribute);
 }
 ```
+
+## Return types
+
+- Query::setStringReturnType()
+    result is instance of [DOMElement](http://php.net/manual/en/class.domelement.php)
+
+- Query::setSimpleXMLReturnType()
+    result is instance of [SimpleXMLElement](http://php.net/manual/en/class.simplexmlelement.php)
+
+- Query::setDomXMLReturnType()
+    result is string
+
+#### Get result field
+
+- DomXmlResult
+```php
+$document = $result->getDocument();
+$title = $doc->getElementsByTagName('TITLE')->item(0)->nodeValue;
+```
+
+- SimpleXML
+```php
+$document = $result->getDocument();
+$title = $doc->TITLE;
+```
+
+#### Get result attribute
+
+- DomXmlResult
+```php
+$document = $result->getDocument();
+$isFavorite = $doc->hasAttribute('favourite');
+```
+
+- SimpleXML
+```php
+$document = $result->getDocument();
+$attributes = $document->attributes();
+$isFavorite = isset($attributes['favourite']);
+```
+

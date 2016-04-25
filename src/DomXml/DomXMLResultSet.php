@@ -1,16 +1,12 @@
 <?php
 
-namespace BCDH\ExistDbClient;
+namespace BCDH\ExistDbClient\DomXml;
 
-use DOMElement;
+use BCDH\ExistDbClient\ResultInterface;
+use BCDH\ExistDbClient\ResultSet;
 
 class DomXMLResultSet extends ResultSet
 {
-    function __construct($client, $resultId, $options)
-    {
-        parent::__construct($client, $resultId, $options);
-    }
-
     public function getNextResult()
     {
         $result = $this->client->retrieve(
@@ -36,7 +32,7 @@ class DomXMLResultSet extends ResultSet
         $rootDocument = $root->getDocument();
 
         foreach($results as $res) {
-            /** @var DOMElement $res */
+            /** @var ResultInterface $res */
             $resultDocument = $res->getDocument();
 
             $this->appendChild($rootDocument, $resultDocument);
