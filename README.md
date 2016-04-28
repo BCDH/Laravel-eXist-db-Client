@@ -99,3 +99,24 @@ $attributes = $document->attributes();
 $isFavorite = isset($attributes['favourite']);
 ```
 
+#### XLS Transformations
+
+- Single result (DomXmlResult|SimpleXmlResult)
+
+```php
+$resultPool = $stmt->execute();
+$results = $resultPool->getAllResults();
+$res = $results[0];
+
+$html = $res->transform(__DIR__.'/xml/cd_catalog_simplified.xsl');
+```
+
+- ResultSet
+
+```php
+$resultPool = $stmt->execute();
+$results = $resultPool->getAllResults();
+$rootTagName = 'catalog';
+
+$html = $resultPool->transform($rootTagName, $results, __DIR__.'/xml/cd_catalog_simplified.xsl');
+```
