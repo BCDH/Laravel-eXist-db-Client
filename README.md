@@ -99,7 +99,7 @@ $attributes = $document->attributes();
 $isFavorite = isset($attributes['favourite']);
 ```
 
-#### XLS Transformations
+## XLS transformations
 
 - Single result (DomXmlResult|SimpleXmlResult)
 
