@@ -1,16 +1,11 @@
 <?php
 
-namespace BCDH\ExistDbClient;
+namespace BCDH\ExistDbClient\SimpleXml;
 
-use SimpleXMLElement;
+use BCDH\ExistDbClient\ResultSet;
 
-class ExtendedXMLResultSet extends ResultSet
+class SimpleXMLResultSet extends ResultSet
 {
-    function __construct($client, $resultId, $options)
-    {
-        parent::__construct($client, $resultId, $options);
-    }
-
     public function getNextResult()
     {
         $result = $this->client->retrieve(
@@ -22,12 +17,12 @@ class ExtendedXMLResultSet extends ResultSet
         $this->currentHit++;
         $this->hasMoreHits = $this->currentHit < $this->hits;
 
-        return new ExtendedSimpleXMLElement($result->scalar);
+        return new SimpleXMLResult($result->scalar);
     }
 
     public function current()
     {
-        return new ExtendedSimpleXMLElement($this->retrieve()->scalar);
+        return new SimpleXMLResult($this->retrieve()->scalar);
     }
 
     public function transform($rootTagName, $results, $view)
@@ -37,11 +32,11 @@ class ExtendedXMLResultSet extends ResultSet
         $rootDom = dom_import_simplexml($root);
 
         foreach($results as $res) {
-            $this->appendChild($rootDom, $res);
+            $this->appendChild($rootDom, $res->getDocument());
         }
 
         $xml = $rootDom->ownerDocument->saveXML();
-        $mergedXml = new ExtendedSimpleXMLElement($xml);
+        $mergedXml = new SimpleXMLResult($xml);
 
         return $mergedXml->transform($view);
     }

@@ -52,6 +52,7 @@ class ClientTest extends SetupTest
 
         $this->assertEquals($expected, $count);
     }
+
     /**
      * @depends testInsertData
      */
@@ -70,9 +71,109 @@ class ClientTest extends SetupTest
             $this->assertTrue(false, "Wrong entries found: $count");
         }
 
-        $xml = $result[0];
+        $xml = $result[0]->getDocument();
         $expectedPrice = "9.90";
 
         $this->assertEquals($expectedPrice, $xml->PRICE);
+    }
+
+    /**
+     * @depends testInsertData
+     */
+    public function testAttributeSimple()
+    {
+        $stmt = self::$connection->prepareQuery('for $cd in collection("/'.self::$collectionName.'")/CD[./ARTIST=$artist] return $cd');
+        $stmt->setSimpleXMLReturnType();
+        $stmt->bindVariable('artist', 'Bonnie Tyler');
+
+        $resultPool = $stmt->execute();
+        $result = $resultPool->getAllResults();
+
+        $count = count($result);
+
+        if($count != 1) {
+            $this->assertTrue(false, "Wrong entries found: $count");
+        }
+
+        $xml = $result[0]->getDocument();
+        $attributes = $xml->attributes();
+
+        $this->assertTrue(isset($attributes['favourite']) && $attributes['favourite']);
+    }
+
+    /**
+     * @depends testInsertData
+     */
+    public function testAttributeSimpleNegative()
+    {
+        $stmt = self::$connection->prepareQuery('for $cd in collection("/'.self::$collectionName.'")/CD[./ARTIST=$artist] return $cd');
+        $stmt->setSimpleXMLReturnType();
+        $stmt->bindVariable('artist', 'Bob Dylan');
+
+        $resultPool = $stmt->execute();
+        $result = $resultPool->getAllResults();
+
+        $count = count($result);
+
+        if($count != 1) {
+            $this->assertTrue(false, "Wrong entries found: $count");
+        }
+
+        $xml = $result[0]->getDocument();
+        $attributes = $xml->attributes();
+
+        $this->assertFalse(isset($attributes['favourite']) && $attributes['favourite']);
+    }
+
+    /**
+     * @depends testInsertData
+     */
+    public function testAttributeDom()
+    {
+        $stmt = self::$connection->prepareQuery('for $cd in collection("/'.self::$collectionName.'")/CD[./ARTIST=$artist] return $cd');
+        $stmt->setDomXMLReturnType();
+        $stmt->bindVariable('artist', 'Bonnie Tyler');
+
+        $resultPool = $stmt->execute();
+        $result = $resultPool->getAllResults();
+
+        $count = count($result);
+
+        if($count != 1) {
+            $this->assertTrue(false, "Wrong entries found: $count");
+        }
+
+        $xml = $result[0]->getDocument();
+        $hasAttribute = $xml->hasAttribute('favourite');
+
+        $this->assertTrue($hasAttribute);
+
+        $isFavorite = $xml->getAttribute('favourite');
+
+        $this->assertEquals('1', $isFavorite);
+    }
+
+    /**
+     * @depends testInsertData
+     */
+    public function testAttributeDomNegative()
+    {
+        $stmt = self::$connection->prepareQuery('for $cd in collection("/'.self::$collectionName.'")/CD[./ARTIST=$artist] return $cd');
+        $stmt->setDomXMLReturnType();
+        $stmt->bindVariable('artist', 'Bob Dylan');
+
+        $resultPool = $stmt->execute();
+        $result = $resultPool->getAllResults();
+
+        $count = count($result);
+
+        if($count != 1) {
+            $this->assertTrue(false, "Wrong entries found: $count");
+        }
+
+        $xml = $result[0]->getDocument();
+        $hasAttribute = $xml->hasAttribute('favourite');
+
+        $this->assertFalse($hasAttribute);
     }
 }

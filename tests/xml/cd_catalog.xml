@@ -8,7 +8,7 @@
 		<PRICE>10.90</PRICE>
 		<YEAR>1985</YEAR>
 	</CD>
-	<CD>
+	<CD favourite="1">
 		<TITLE>Hide your heart</TITLE>
 		<ARTIST>Bonnie Tyler</ARTIST>
 		<COUNTRY>UK</COUNTRY>

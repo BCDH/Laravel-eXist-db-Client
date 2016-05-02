@@ -1,11 +1,10 @@
 <?php
 
-namespace BCDH\ExistDbClient;
+namespace BCDH\ExistDbClient\SimpleXml;
 
-use SimpleXMLElement;
 use XSLTProcessor;
 
-class ExtendedSimpleXMLElement extends SimpleXMLElement
+class SimpleXMLElement extends \SimpleXMLElement
 {
     public function transform($view)
     {

@@ -39,7 +39,7 @@ class XLSTransformationsTest extends SetupTest
     public function testSingleExtendedTransformation() {
         $stmt = self::$connection->prepareQuery('for $cd in collection("/'.self::$collectionName.'")/CD[./ARTIST=$artist] return $cd');
         $stmt->bindVariable('artist', 'Bonnie Tyler');
-        $stmt->setExtendedXMLReturnType();
+        $stmt->setSimpleXMLReturnType();
 
         $resultPool = $stmt->execute();
         $results = $resultPool->getAllResults();
@@ -56,7 +56,7 @@ class XLSTransformationsTest extends SetupTest
      */
     public function testGroupExtendedTransformation() {
         $stmt = self::$connection->prepareQuery('for $cd in /CD return $cd');
-        $stmt->setExtendedXMLReturnType();
+        $stmt->setSimpleXMLReturnType();
 
         $resultPool = $stmt->execute();
         $results = $resultPool->getAllResults();
@@ -88,9 +88,10 @@ class XLSTransformationsTest extends SetupTest
     private function getExpectedXml($results) {
         $xml = '';
         foreach($results as $r) {
+            $doc = $r->getDocument();
             $xml .= '<tr>';
-            $xml .= '<td>' . $r->TITLE . '</td>';
-            $xml .= '<td>' . $r->ARTIST . '</td>';
+            $xml .= '<td>' . $doc->TITLE . '</td>';
+            $xml .= '<td>' . $doc->ARTIST . '</td>';
             $xml .= '</tr>';
         }
         return $xml;

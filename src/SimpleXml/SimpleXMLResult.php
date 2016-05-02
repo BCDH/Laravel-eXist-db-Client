@@ -1,19 +1,20 @@
 <?php
 
-namespace BCDH\ExistDbClient;
+namespace BCDH\ExistDbClient\SimpleXml;
 
+use BCDH\ExistDbClient\ResultInterface;
 use XSLTProcessor;
 
-class ExtendedXMLResult
+class SimpleXMLResult implements ResultInterface
 {
     /**
-     * @var ExtendedSimpleXMLElement
+     * @var SimpleXMLElement
      */
     private $document;
 
     function __construct($documentScalar)
     {
-        $this->document = new ExtendedSimpleXMLElement($documentScalar);
+        $this->document = new SimpleXMLElement($documentScalar);
     }
 
     public function transform($view) {
@@ -21,5 +22,12 @@ class ExtendedXMLResult
         $xsltProcessor->registerPHPFunctions();
         $xsltProcessor->importStylesheet(simplexml_load_file($view));
         return $xsltProcessor->transformToXml($this->document);
+    }
+
+    /**
+     * @return SimpleXMLElement
+     */
+    public function getDocument() {
+        return $this->document;
     }
 }

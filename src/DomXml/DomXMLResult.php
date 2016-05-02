@@ -1,7 +1,8 @@
 <?php
 
-namespace BCDH\ExistDbClient;
+namespace BCDH\ExistDbClient\DomXml;
 
+use BCDH\ExistDbClient\ResultInterface;
 use XSLTProcessor;
 use DOMElement;
 
@@ -11,7 +12,7 @@ use DOMElement;
  * Class DomXMLResult
  * @package BCDH\ExistDbClient
  */
-class DomXMLResult
+class DomXMLResult implements ResultInterface
 {
     /**
      * @var DOMElement

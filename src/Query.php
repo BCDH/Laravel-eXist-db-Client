@@ -2,6 +2,9 @@
 
 namespace BCDH\ExistDbClient;
 
+use BCDH\ExistDbClient\DomXml\DomXMLResultSet;
+use BCDH\ExistDbClient\SimpleXml\SimpleXMLResultSet;
+
 class Query
 {
 	protected $xql;
@@ -40,16 +43,6 @@ class Query
 	public function setSimpleXMLReturnType()
 	{
 		$this->returnType = "SimpleXML";
-	}
-	
-	public function setDOMReturnType()
-	{
-		$this->returnType = "DOM";
-	}
-
-	public function setExtendedXMLReturnType()
-	{
-		$this->returnType = "ExtendedXML";
 	}
 
 	public function setDomXMLReturnType()
@@ -99,22 +92,8 @@ class Query
 		
 		switch($this->returnType)
 		{
-			case "DOM":
-				$result = new DOMResultSet(
-					$this->client,
-					$resultId,
-					$this->options
-				);
-				break;
 			case "SimpleXML":
 				$result = new SimpleXMLResultSet(
-					$this->client,
-					$resultId,
-					$this->options
-				);
-				break;
-			case "ExtendedXML":
-				$result = new ExtendedXMLResultSet(
 					$this->client,
 					$resultId,
 					$this->options
