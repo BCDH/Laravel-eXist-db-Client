@@ -41,7 +41,6 @@ sudo apt-get install php5-xsl
 
 ## Usage 
 
-
 ```php
 use BCDH\ExistDbClient\ExistDbClient;
 
